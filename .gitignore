@@ -2,3 +2,5 @@
 /out/
 /tmp/
 *.zip
+/cmd/stub/rsrc.rc
+/cmd/stub/rsrc.syso

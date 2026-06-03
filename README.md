@@ -18,11 +18,25 @@ go build -o .\bin\stub.exe .\cmd\stub
 go build -o .\bin\packer.exe .\cmd\packer
 ```
 
+如果要给最终生成的单文件 exe 设置图标，先准备一个 `.ico` 文件，然后用脚本编译 `stub.exe`：
+
+```powershell
+.\scripts\build-windows.ps1 -Icon .\assets\app.ico
+```
+
+脚本会先用 `windres` 生成 `cmd\stub\rsrc.syso`，Go 编译 `stub.exe` 时会自动嵌入这个资源。之后用这个 `stub.exe` 打包出的最终 exe 会继承同一个图标。
+
 如果不想运行时显示控制台窗口，可以这样编译 Windows GUI 壳：
 
 ```powershell
 go build -ldflags="-H=windowsgui" -o .\bin\stub.exe .\cmd\stub
 go build -o .\bin\packer.exe .\cmd\packer
+```
+
+带图标并隐藏控制台窗口时，可以这样编译：
+
+```powershell
+.\scripts\build-windows.ps1 -Icon .\assets\app.ico -Gui
 ```
 
 ## 打包程序
